@@ -1,65 +1,57 @@
 import Image from "next/image";
+import { FaPlus } from "react-icons/fa";
+import { RiTodoFill } from "react-icons/ri";
+import { IoStatsChartSharp } from "react-icons/io5";
+import { FaDumbbell } from "react-icons/fa";
+import { LuClipboardList } from "react-icons/lu";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="">
+      <nav className="bg-purple-500 p-1">
+        <ul className="flex justify-between gap-4 m-4 text-white">
+          <div>
+          <li className="text-2xl font-bold py-4 px-4">To-do List</li>
+          </div>
+          <div className="flex gap-4 font-semibold cursor-pointer   ">
+          <li className=""><button className="btn-primary flex items-center"><FaPlus className="" />เพิ่มรายการใหม่</button></li>
+          <li className="py-4 px-6">สมัครสมาชิก</li>
+          <li className="py-4 pr-4">เข้าสู่ระบบ</li>
+          </div>
+        </ul>
+      </nav>
+      
+      <div className="flex flex-1 ">
+
+      <aside className="flex flex-col justify-end w-70 bg-slate-950 p-8 h-screen  ">
+         <h1 className=" text-xl ml-5 text-white font-semibold ">Dashboard</h1>
+          <ul className="m-4 font-medium text-white h-full cursor-pointer">
+           <li className="p-1 flex items-center hover:bg-gray-700 hover:text-white  transition-colors duration-300"><RiTodoFill className="mx-2"/>รายการสิ่งที่ต้องทำ</li>
+           <li className="p-1 flex items-center hover:bg-gray-700 hover:text-white transition-colors duration-300"><IoStatsChartSharp className="mx-2"/>สถิติรวม</li>
+           <li className="p-1 flex items-center hover:bg-gray-700 hover:text-white  transition-colors duration-300"><LuClipboardList className="mx-2"/>งานที่ยังคงค้างอยู่</li>
+      </ul>
+      </aside>
+      
+       <main className="flex-1  p-6 overflow-y-auto  ">
+       
+        <div>
+          <div className="flex justify-center mx-4 my-6  gap-8">
+             <div className="w-64 h-50 rounded-xl shadow shadow-sm shadow-gray-300 ">
+             </div>
+             <div className="w-64 h-50 rounded-xl shadow shadow-sm  shadow-gray-300">
+             </div>
+             <div className="w-64 h-50 rounded-xl shadow shadow-sm  shadow-gray-300">
+             </div>
+          </div>
+        <div className="flex justify-center  ">
+          <input type="text" placeholder="เพิ่มงานใหม่" className="w-100 py-4 px-4 mr-4 bg-gray-100 rounded-lg focus:outline-none ring ring-purple-500 ring-offset ring-2  mx-5"/> <button className="btn-primary">เพิ่มงาน</button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
         </div>
-      </main>
+       </main>
+        
+      </div>
+      
+    
     </div>
   );
 }
