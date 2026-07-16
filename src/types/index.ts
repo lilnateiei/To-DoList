@@ -12,6 +12,20 @@ export type Category =
 
 export type TaskStatus = "todo" | "done";
 
+export interface ProjectDraft {
+  name:  string;
+  desc:  string;
+  color: string;
+  tasks: Task[];
+}
+
+const INITIAL_DRAFT: ProjectDraft = {
+  name:  "",
+  desc:  "",
+  color: "#7c3aed",
+  tasks: [],
+};
+
 // ── Task ──────────────────────────────────
 export interface Task {
   id: string;

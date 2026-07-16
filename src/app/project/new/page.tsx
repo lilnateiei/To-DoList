@@ -8,10 +8,10 @@ import { FaArrowLeft, FaArrowRight, FaPlus, FaSpinner } from "react-icons/fa";
 import type { Task, Category, Priority } from "@/types";
 
 // ── Sub Components ────────────────────────
-import StepIndicator  from "./_components/StepIndicator";
-import Step1ProjectInfo from "./_components/Step1ProjectInfo";
-import Step2AddTasks  from "./_components/Step2AddTasks";
-import Step3Confirm   from "./_components/Step3Confirm";
+import StepIndicator  from "@/components/StepIndicator";
+import Step1ProjectInfo from "@/components/Step1ProjectInfo";
+import Step2AddTasks  from "@/components/Step2AddTasks";
+import Step3Confirm   from "@/components/Step3Confirm";
 
 // ── Types ─────────────────────────────────
 export interface ProjectDraft {
@@ -27,6 +27,8 @@ const INITIAL_DRAFT: ProjectDraft = {
   color: "#7c3aed",
   tasks: [],
 };
+
+
 
 export default function NewProjectPage() {
   const router = useRouter();

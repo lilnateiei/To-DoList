@@ -57,7 +57,7 @@ export default function DashboardPage() {
             </span>
           </div>
           <Link
-            href="/projects/new"
+            href="/project/new"
             className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all"
           >
             <FaPlus size={11} />
@@ -126,13 +126,15 @@ export default function DashboardPage() {
 
               {/* Add New Project Card */}
               <Link
-                href="/projects/new"
+                href="/project/new"
                 className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-2xl p-8 text-gray-400 hover:border-violet-300 hover:text-violet-500 hover:bg-violet-50 transition-all group min-h-[180px]"
               >
                 <div className="w-10 h-10 rounded-xl border-2 border-dashed border-gray-300 group-hover:border-violet-400 flex items-center justify-center transition-all">
                   <FaPlus size={14} />
                 </div>
+               
                 <span className="text-sm font-medium">เพิ่มโปรเจกต์ใหม่</span>
+                 
               </Link>
             </div>
           )}
