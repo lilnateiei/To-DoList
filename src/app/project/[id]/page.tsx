@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { FaPlus, FaArrowLeft } from "react-icons/fa";
 import { RiTodoFill } from "react-icons/ri";
@@ -11,62 +12,101 @@ import ProgressBar from "@/components/ui/ProgressBar";
 import EmptyState from "@/components/ui/EmptyState";
 import type { Task, Project, TaskFilter as TFilter } from "@/types";
 
-// ── Mock ────────────────────────────────
-const MOCK_PROJECT: Project = {
-  id: "1",
-  name: "Website Redesign",
-  desc: "ออกแบบหน้าเว็บใหม่ทั้งหมด ให้ทันสมัยและใช้งานง่าย",
-  color: "#8b5cf6",
-  createdAt: new Date().toISOString(),
-  tasks: [
-    { id: "t1", name: "วาด Wireframe หน้าหลัก", category: "design",       priority: "high",   status: "done", createdAt: new Date().toISOString(), dueDate: "2024-12-20" },
-    { id: "t2", name: "ทำ Prototype",            category: "design",       priority: "high",   status: "todo", createdAt: new Date().toISOString(), dueDate: "2024-12-25" },
-    { id: "t3", name: "เขียน Component CSS",     category: "development",  priority: "medium", status: "todo", createdAt: new Date().toISOString() },
-    { id: "t4", name: "ประชุมทีม UX",             category: "meeting",      priority: "low",    status: "done", createdAt: new Date().toISOString() },
-    { id: "t5", name: "Research Competitor",     category: "research",     priority: "medium", status: "todo", createdAt: new Date().toISOString() },
-  ],
-};
 
+
+// ── Mock ────────────────────────────────
+const MOCK_PROJECT: Project[] = [
+  {
+    id: "1",
+    name: "Website Redesign",
+    desc: "ออกแบบหน้าเว็บใหม่ทั้งหมด",
+    color: "#8b5cf6",
+    createdAt: new Date().toISOString(),
+    tasks: [
+      { id: "t1", name: "วาด Wireframe", category: "design",       priority: "high",   status: "done", createdAt: new Date().toISOString() },
+      { id: "t2", name: "ทำ Prototype",  category: "design",       priority: "high",   status: "todo", createdAt: new Date().toISOString() },
+      { id: "t3", name: "เขียน CSS",     category: "development",  priority: "medium", status: "todo", createdAt: new Date().toISOString() },
+    ],
+  },
+  {
+    id: "2",
+    name: "Marketing Q1",
+    desc: "แคมเปญการตลาดไตรมาสแรก",
+    color: "#f59e0b",
+    createdAt: new Date().toISOString(),
+    tasks: [
+      { id: "t4", name: "วางแผนงบ",      category: "marketing",   priority: "high",   status: "done", createdAt: new Date().toISOString() },
+      { id: "t5", name: "ทำ Content",     category: "marketing",   priority: "medium", status: "done", createdAt: new Date().toISOString() },
+    ],
+  },
+];
+
+   
 export default function ProjectPage() {
-  const [project, setProject]   = useState<Project>(MOCK_PROJECT);
-  const [filter, setFilter]     = useState<TFilter>({ status: "all", category: "all", priority: "all" });
+  const params = useParams();
+  const idFromUrl = params.id as string;
+  const [projects, setProjects] = useState<Project[]>(MOCK_PROJECT);
+  const [selectedId, setSelectedId] = useState<string>(idFromUrl);
+  const [filter, setFilter] = useState<TFilter>({ status: "all", category: "all", priority: "all" });
   const [showForm, setShowForm] = useState(false);
+
+  // ── หาโปรเจกต์ที่กำลังเลือกอยู่ ──────────
+  const project = useMemo(
+    () => projects.find((p) => p.id === selectedId),
+    [projects, selectedId]
+  );
 
   // ── Handlers ────────────────────────────
   const handleAddTask = (task: Task) => {
-    setProject((p) => ({ ...p, tasks: [task, ...p.tasks] }));
+    setProjects((prev) =>
+      prev.map((p) =>
+        p.id === selectedId ? { ...p, tasks: [task, ...p.tasks] } : p
+      )
+    );
     setShowForm(false);
   };
 
   const handleToggle = (id: string) => {
-    setProject((p) => ({
-      ...p,
-      tasks: p.tasks.map((t) =>
-        t.id === id ? { ...t, status: t.status === "done" ? "todo" : "done" } : t
-      ),
-    }));
+    setProjects((prev) =>
+      prev.map((p) =>
+        p.id === selectedId
+          ? {
+              ...p,
+              tasks: p.tasks.map((t) =>
+                t.id === id ? { ...t, status: t.status === "done" ? "todo" : "done" } : t
+              ),
+            }
+          : p
+      )
+    );
   };
 
   const handleDelete = (id: string) => {
-    setProject((p) => ({ ...p, tasks: p.tasks.filter((t) => t.id !== id) }));
+    setProjects((prev) =>
+      prev.map((p) =>
+        p.id === selectedId ? { ...p, tasks: p.tasks.filter((t) => t.id !== id) } : p
+      )
+    );
   };
 
   // ── Filter ──────────────────────────────
   const filtered = useMemo(() => {
+    if (!project) return [];
     return project.tasks.filter((t) => {
-      if (filter.status   !== "all" && t.status   !== filter.status)   return false;
+      if (filter.status !== "all" && t.status !== filter.status) return false;
       if (filter.category !== "all" && t.category !== filter.category) return false;
       if (filter.priority !== "all" && t.priority !== filter.priority) return false;
       return true;
     });
-  }, [project.tasks, filter]);
+  }, [project, filter]);
 
   const counts = {
-    all:  project.tasks.length,
-    todo: project.tasks.filter((t) => t.status === "todo").length,
-    done: project.tasks.filter((t) => t.status === "done").length,
+    all: project?.tasks.length ?? 0,
+    todo: project?.tasks.filter((t) => t.status === "todo").length ?? 0,
+    done: project?.tasks.filter((t) => t.status === "done").length ?? 0,
   };
 
+  if (!project) return null; // กันไว้เผื่อยังไม่มีโปรเจกต์ถูกเลือก
   return (
     <div className="min-h-screen bg-white">
 
@@ -105,11 +145,11 @@ export default function ProjectPage() {
         {/* Project Header */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: project.color }} />
-            <h1 className="text-xl font-bold text-gray-900">{project.name}</h1>
+            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: project?.color }} />
+            <h1 className="text-xl font-bold text-gray-900">{project?.name}</h1>
           </div>
-          {project.desc && (
-            <p className="text-sm text-gray-400">{project.desc}</p>
+          {project?.desc && (
+            <p className="text-sm text-gray-400">{project?.desc}</p>
           )}
           <ProgressBar total={counts.all} done={counts.done} />
         </div>
