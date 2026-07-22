@@ -74,7 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {total} tasks
         </span>
         {done === total && total > 0 ? (
-          <span className="text-caption-sm font-medium text-success">✅ เสร็จแล้ว!</span>
+          <span className="text-caption-sm font-medium text-success">เสร็จแล้ว</span>
         ) : (
           <span className="text-caption-sm text-neutral-500">
             เหลือ{" "}

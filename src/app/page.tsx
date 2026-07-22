@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { RiTodoFill } from "react-icons/ri";
 import { HiOutlineViewGrid } from "react-icons/hi";
+import { HiOutlineFolderOpen } from "react-icons/hi";
 import ProjectCard from "@/components/project/ProjectCard";
 import EmptyState from "@/components/ui/EmptyState";
 import type { Project } from "@/types";
@@ -74,7 +75,7 @@ export default function DashboardPage() {
             ภาพรวมทั้งหมด
           </p>
           <h1 className="text-display-xl font-semibold text-ink">
-            สวัสดี 👋 วันนี้มีอะไรต้องทำ?
+            วันนี้มีอะไรต้องทำ?
           </h1>
 
           {/* Stat Pills */}
@@ -105,9 +106,9 @@ export default function DashboardPage() {
 
           {projects.length === 0 ? (
             <EmptyState
-              emoji="🗂️"
+              icon={<HiOutlineFolderOpen size={48} />}
               title="ยังไม่มีโปรเจกต์"
-              desc="สร้างโปรเจกต์แรกของคุณ แล้วเริ่มจัดการ tasks ได้เลย!"
+              desc="สร้างโปรเจกต์แรกของคุณ แล้วเริ่มจัดการ tasks ได้เลย"
               action={
                 <Link
                   href="/project/new"

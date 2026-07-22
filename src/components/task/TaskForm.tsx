@@ -10,18 +10,18 @@ interface TaskFormProps {
 }
 
 const CATEGORIES: { value: Category; label: string }[] = [
-  { value: "design",      label: "🎨 Design" },
-  { value: "development", label: "💻 Dev" },
-  { value: "marketing",   label: "📣 Marketing" },
-  { value: "research",    label: "🔍 Research" },
-  { value: "meeting",     label: "🤝 Meeting" },
-  { value: "other",       label: "📌 Other" },
+  { value: "design",      label: "Design" },
+  { value: "development", label: "Development" },
+  { value: "marketing",   label: "Marketing" },
+  { value: "research",    label: "Research" },
+  { value: "meeting",     label: "Meeting" },
+  { value: "other",       label: "Other" },
 ];
 
 const PRIORITIES: { value: Priority; label: string; color: string }[] = [
-  { value: "high",   label: "🔴 สูง",   color: "border-red-300     bg-red-50     text-red-500"     },
-  { value: "medium", label: "🟡 กลาง",  color: "border-amber-300   bg-amber-50   text-amber-500"   },
-  { value: "low",    label: "🟢 ต่ำ",   color: "border-emerald-300 bg-emerald-50 text-emerald-600" },
+  { value: "high",   label: "High",   color: "border-red-300     bg-red-50     text-red-500"     },
+  { value: "medium", label: "Medium", color: "border-amber-300   bg-amber-50   text-amber-500"   },
+  { value: "low",    label: "Low",    color: "border-emerald-300 bg-emerald-50 text-emerald-600" },
 ];
 
 export default function TaskForm({ onAdd, onCancel }: TaskFormProps) {

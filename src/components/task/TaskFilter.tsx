@@ -16,19 +16,19 @@ const STATUS_TABS = [
 
 const CATEGORIES: { value: Category | "all"; label: string }[] = [
   { value: "all",         label: "ทุกประเภท" },
-  { value: "design",      label: "🎨 Design" },
-  { value: "development", label: "💻 Dev" },
-  { value: "marketing",   label: "📣 Marketing" },
-  { value: "research",    label: "🔍 Research" },
-  { value: "meeting",     label: "🤝 Meeting" },
-  { value: "other",       label: "📌 Other" },
+  { value: "design",      label: "Design" },
+  { value: "development", label: "Development" },
+  { value: "marketing",   label: "Marketing" },
+  { value: "research",    label: "Research" },
+  { value: "meeting",     label: "Meeting" },
+  { value: "other",       label: "Other" },
 ];
 
 const PRIORITIES: { value: Priority | "all"; label: string }[] = [
   { value: "all",    label: "ทุกระดับ" },
-  { value: "high",   label: "🔴 สูง" },
-  { value: "medium", label: "🟡 กลาง" },
-  { value: "low",    label: "🟢 ต่ำ" },
+  { value: "high",   label: "High" },
+  { value: "medium", label: "Medium" },
+  { value: "low",    label: "Low" },
 ];
 
 export default function TaskFilter({ filter, onChange, counts }: TaskFilterProps) {

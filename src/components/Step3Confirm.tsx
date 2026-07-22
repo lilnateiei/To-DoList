@@ -6,18 +6,18 @@ import type { ProjectDraft } from "@/page";
 import type { Task, Category, Priority } from "@/types";
 
 const CATEGORY_MAP = {
-  other:       { label: "📌 Other",      bg: "bg-gray-100",   text: "text-gray-500"   },
-  design:      { label: "🎨 Design",     bg: "bg-pink-50",    text: "text-pink-500"   }, 
-  development: { label: "💻 Dev",        bg: "bg-blue-50",    text: "text-blue-500"   },
-  marketing:   { label: "📣 Marketing",  bg: "bg-amber-50",   text: "text-amber-500"  },
-  research:    { label: "🔍 Research",   bg: "bg-teal-50",    text: "text-teal-500"   },
-  meeting:     { label: "🤝 Meeting",    bg: "bg-orange-50",  text: "text-orange-500" },
+  other:       { label: "Other",      bg: "bg-gray-100",   text: "text-gray-500"   },
+  design:      { label: "Design",     bg: "bg-pink-50",    text: "text-pink-500"   }, 
+  development: { label: "Development", bg: "bg-blue-50",    text: "text-blue-500"   },
+  marketing:   { label: "Marketing",  bg: "bg-amber-50",   text: "text-amber-500"  },
+  research:    { label: "Research",   bg: "bg-teal-50",    text: "text-teal-500"   },
+  meeting:     { label: "Meeting",    bg: "bg-orange-50",  text: "text-orange-500" },
 };
 
 const PRIORITY_MAP = {
-  high:   { emoji: "🔴", label: "สูง",   bg: "bg-red-50",     text: "text-red-500"     },
-  medium: { emoji: "🟡", label: "กลาง",  bg: "bg-amber-50",   text: "text-amber-500"   },
-  low:    { emoji: "🟢", label: "ต่ำ",   bg: "bg-emerald-50", text: "text-emerald-600" },
+  high:   { label: "High",   bg: "bg-red-50",     text: "text-red-500"     },
+  medium: { label: "Medium", bg: "bg-amber-50",   text: "text-amber-500"   },
+  low:    { label: "Low",    bg: "bg-emerald-50", text: "text-emerald-600" },
 };
 
 interface Props {

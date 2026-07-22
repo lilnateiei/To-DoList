@@ -6,18 +6,18 @@ import { MdDragIndicator } from "react-icons/md";
 import type { Task, Category, Priority } from "@/types";
 
 const CATEGORIES = [
-  { value: "other",       label: "🏷️ ประเภท", bg: "bg-gray-100",   text: "text-gray-500"   },
-  { value: "design",      label: "🎨 Design",   bg: "bg-pink-50",    text: "text-pink-500"   },
-  { value: "development", label: "💻 Dev",      bg: "bg-blue-50",    text: "text-blue-500"   },
-  { value: "marketing",   label: "📣 Marketing", bg: "bg-amber-50",   text: "text-amber-500"  },
-  { value: "research",    label: "🔍 Research",  bg: "bg-teal-50",    text: "text-teal-500"   },
-  { value: "meeting",     label: "🤝 Meeting",   bg: "bg-orange-50",  text: "text-orange-500" },
+  { value: "other",       label: "Category", bg: "bg-gray-100",   text: "text-gray-500"   },
+  { value: "design",      label: "Design",   bg: "bg-pink-50",    text: "text-pink-500"   },
+  { value: "development", label: "Dev",      bg: "bg-blue-50",    text: "text-blue-500"   },
+  { value: "marketing",   label: "Marketing", bg: "bg-amber-50",   text: "text-amber-500"  },
+  { value: "research",    label: "Research",  bg: "bg-teal-50",    text: "text-teal-500"   },
+  { value: "meeting",     label: "Meeting",   bg: "bg-orange-50",  text: "text-orange-500" },
 ];
 
 const PRIORITIES = [
-  { value: "high",   emoji: "🔴", label: "สูง",   bg: "bg-red-50",     text: "text-red-500",     border: "border-red-300"     },
-  { value: "medium", emoji: "🟡", label: "กลาง", bg: "bg-amber-50",   text: "text-amber-500",   border: "border-amber-300"   },
-  { value: "low",    emoji: "🟢", label: "ต่ำ",   bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-300" },
+  { value: "high",   label: "High",   bg: "bg-red-50",     text: "text-red-500",     border: "border-red-300"     },
+  { value: "medium", label: "Medium", bg: "bg-amber-50",   text: "text-amber-500",   border: "border-amber-300"   },
+  { value: "low",    label: "Low",    bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-300" },
 ];
 
 interface Props {
@@ -73,7 +73,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
       setError("");
       
       // Show success feedback
-      showToast(`เพิ่ม "${name}" เรียบร้อย ✅`);
+      showToast(`เพิ่ม "${name}" เรียบร้อย`);
       
     } catch (err) {
       setError("เกิดข้อผิดพลาด กรุณาลองใหม่");
@@ -87,7 +87,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
     const task = tasks.find(t => t.id === id);
     onChange(tasks.filter(t => t.id !== id));
     if (task) {
-      showToast(`ลบ "${task.name}" แล้ว 🗑️`);
+      showToast(`ลบ "${task.name}" แล้ว`);
     }
   };
 
@@ -134,7 +134,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
           ขั้นตอนที่ 2
         </p>
         <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-          เพิ่ม Tasks 📋
+          เพิ่ม Tasks
         </h1>
         <p className="text-sm text-gray-400 mt-1">
           เพิ่มงานที่ต้องทำในโปรเจกต์นี้ ข้ามได้ถ้ายังไม่พร้อม
@@ -207,7 +207,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
         {/* Error Message */}
         {error && (
           <div className="px-3 py-2 bg-red-50 border border-red-100 rounded-lg animate-in fade-in slide-in-from-top-1 duration-200">
-            <p className="text-xs text-red-600 font-medium">⚠️ {error}</p>
+            <p className="text-xs text-red-600 font-medium">{error}</p>
           </div>
         )}
 
@@ -241,7 +241,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
                   }`}
                 title={`ความสำคัญ${p.label}`}
               >
-                {p.emoji}
+                {p.label}
               </button>
             ))}
           </div>
@@ -268,16 +268,16 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
         {tasks.length > 0 && (
           <div className="flex gap-3 pt-2 border-t border-gray-100">
             <span className="text-xs text-gray-500 flex items-center gap-1">
-              📊 <span className="font-medium">{categories.length} ประเภท</span>
+              <span className="font-medium">{categories.length} ประเภท</span>
             </span>
             {dueDateCount > 0 && (
               <span className="text-xs text-gray-500 flex items-center gap-1">
-                📅 <span className="font-medium">{dueDateCount} มีกำหนด</span>
+                <span className="font-medium">{dueDateCount} มีกำหนด</span>
               </span>
             )}
             {highPriorityCount > 0 && (
               <span className="text-xs text-red-500 flex items-center gap-1 font-medium">
-                🔴 {highPriorityCount} สำคัญสูง
+                {highPriorityCount} สำคัญสูง
               </span>
             )}
           </div>
@@ -290,11 +290,11 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
         <div className="text-center py-16 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30 animate-in fade-in duration-300">
           <div className="flex flex-col items-center gap-3">
             <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center">
-              <span className="text-2xl">📋</span>
+              <span className="text-2xl text-gray-400">• • •</span>
             </div>
             <div>
               <p className="text-sm font-medium text-gray-600">ยังไม่มี task</p>
-              <p className="text-xs text-gray-400 mt-1">เพิ่มงานด้านบน หรือข้ามไปก่อนก็ได้ 😊</p>
+              <p className="text-xs text-gray-400 mt-1">เพิ่มงานด้านบน หรือข้ามไปก่อนได้</p>
             </div>
           </div>
         </div>
@@ -353,7 +353,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
                     
                     {/* Priority Badge */}
                     <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${prioConfig.bg} ${prioConfig.text}`}>
-                      {prioConfig.emoji} {prioConfig.label}
+                      {prioConfig.label}
                     </span>
                     
                     {/* Due Date Badge */}
@@ -369,7 +369,7 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
                           day: "numeric",
                           month: "short",
                         })}
-                        {isOverdue && <span className="text-[10px]">⚠️</span>}
+                        {isOverdue && <span className="text-[10px]">!</span>}
                       </span>
                     )}
                     
@@ -401,12 +401,12 @@ export default function Step2AddTasks({ tasks, onChange }: Props) {
           
           <div className="flex-1">
             <p className="text-sm font-bold text-violet-800 mb-1">
-              เยี่ยม! เพิ่มงานไปแล้ว <span className="text-violet-600">{tasks.length}</span> รายการ
+              เพิ่มงานไปแล้ว <span className="text-violet-600">{tasks.length}</span> รายการ
             </p>
             <div className="flex gap-4 text-xs text-violet-600">
-              <span>📊 {categories.length} ประเภท</span>
-              {dueDateCount > 0 && <span>📅 {dueDateCount} มีกำหนด</span>}
-              {highPriorityCount > 0 && <span>🔴 {highPriorityCount} สำคัญสูง</span>}
+              <span>{categories.length} ประเภท</span>
+              {dueDateCount > 0 && <span>{dueDateCount} มีกำหนด</span>}
+              {highPriorityCount > 0 && <span>{highPriorityCount} สำคัญสูง</span>}
             </div>
           </div>
           
