@@ -15,7 +15,7 @@ const MOCK_PROJECTS: Project[] = [
     id: "1",
     name: "Website Redesign",
     desc: "ออกแบบหน้าเว็บใหม่ทั้งหมด",
-    color: "#8b5cf6",
+    color: "#6c47ff",
     createdAt: new Date().toISOString(),
     tasks: [
       { id: "t1", name: "วาด Wireframe", category: "design",       priority: "high",   status: "done", createdAt: new Date().toISOString() },
@@ -27,7 +27,7 @@ const MOCK_PROJECTS: Project[] = [
     id: "2",
     name: "Marketing Q1",
     desc: "แคมเปญการตลาดไตรมาสแรก",
-    color: "#f59e0b",
+    color: "#ea520c",
     createdAt: new Date().toISOString(),
     tasks: [
       { id: "t4", name: "วางแผนงบ",      category: "marketing",   priority: "high",   status: "done", createdAt: new Date().toISOString() },
@@ -43,22 +43,22 @@ export default function DashboardPage() {
   const doneTasks  = projects.reduce((acc, p) => acc + p.tasks.filter(t => t.status === "done").length, 0);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-canvas">
 
       {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
+      <nav className="sticky top-0 z-50 nav-bar">
+        <div className="max-w-5xl mx-auto flex justify-between items-center px-6">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center">
-              <RiTodoFill className="text-white" size={14} />
+            <div className="w-7 h-7 bg-purple-500 rounded-md flex items-center justify-center">
+              <RiTodoFill className="text-canvas" size={14} />
             </div>
-            <span className="font-bold text-gray-900">
-              To-do <span className="text-violet-600">List</span>
+            <span className="font-bold text-ink text-body-md">
+              To-do <span className="text-purple-500">List</span>
             </span>
           </div>
           <Link
             href="/project/new"
-            className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all"
+            className="btn-primary text-sm"
           >
             <FaPlus size={11} />
             โปรเจกต์ใหม่
@@ -70,24 +70,24 @@ export default function DashboardPage() {
 
         {/* ── Hero Stats ── */}
         <div className="flex flex-col gap-1">
-          <p className="text-xs font-semibold text-violet-500 uppercase tracking-widest">
+          <p className="text-overline font-medium text-purple-500 uppercase tracking-widest">
             ภาพรวมทั้งหมด
           </p>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-display-xl font-semibold text-ink">
             สวัสดี 👋 วันนี้มีอะไรต้องทำ?
           </h1>
 
           {/* Stat Pills */}
           <div className="flex flex-wrap gap-3 mt-4">
             {[
-              { label: "โปรเจกต์ทั้งหมด", value: projects.length,            color: "bg-violet-50 text-violet-600" },
-              { label: "Tasks ทั้งหมด",   value: totalTasks,                 color: "bg-blue-50   text-blue-600"   },
-              { label: "เสร็จแล้ว",        value: doneTasks,                  color: "bg-emerald-50 text-emerald-600"},
-              { label: "ยังค้างอยู่",       value: totalTasks - doneTasks,     color: "bg-amber-50  text-amber-600"  },
+              { label: "โปรเจกต์ทั้งหมด", value: projects.length,            color: "bg-surface-1 text-purple-500" },
+              { label: "Tasks ทั้งหมด",   value: totalTasks,                 color: "bg-surface-1 text-ink"   },
+              { label: "เสร็จแล้ว",        value: doneTasks,                  color: "bg-surface-1 text-success"},
+              { label: "ยังค้างอยู่",       value: totalTasks - doneTasks,     color: "bg-surface-1 text-warning"  },
             ].map((s) => (
-              <div key={s.label} className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium ${s.color}`}>
+              <div key={s.label} className={`flex items-center gap-2 px-4 py-2 rounded-md text-body-sm font-medium ${s.color}`}>
                 <span className="text-lg font-bold">{s.value}</span>
-                <span className="opacity-70">{s.label}</span>
+                <span className="text-neutral-600">{s.label}</span>
               </div>
             ))}
           </div>
@@ -96,11 +96,11 @@ export default function DashboardPage() {
         {/* ── Project Grid ── */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2 text-sm font-semibold text-gray-500">
+            <div className="flex items-center gap-2 text-body-sm font-medium text-neutral-600">
               <HiOutlineViewGrid size={16} />
               <span>โปรเจกต์ของฉัน</span>
             </div>
-            <span className="text-xs text-gray-400">{projects.length} โปรเจกต์</span>
+            <span className="text-caption-sm text-neutral-500">{projects.length} โปรเจกต์</span>
           </div>
 
           {projects.length === 0 ? (
@@ -110,8 +110,8 @@ export default function DashboardPage() {
               desc="สร้างโปรเจกต์แรกของคุณ แล้วเริ่มจัดการ tasks ได้เลย!"
               action={
                 <Link
-                  href="/projects/new"
-                  className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all"
+                  href="/project/new"
+                  className="btn-primary text-sm"
                 >
                   <FaPlus size={11} />
                   สร้างโปรเจกต์แรก
@@ -127,13 +127,13 @@ export default function DashboardPage() {
               {/* Add New Project Card */}
               <Link
                 href="/project/new"
-                className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-2xl p-8 text-gray-400 hover:border-violet-300 hover:text-violet-500 hover:bg-violet-50 transition-all group min-h-[180px]"
+                className="flex flex-col items-center justify-center gap-2 border border-hairline rounded-lg p-8 text-neutral-500 hover:border-purple-500 hover:text-purple-500 hover:bg-surface-1 transition-all group min-h-[180px]"
               >
-                <div className="w-10 h-10 rounded-xl border-2 border-dashed border-gray-300 group-hover:border-violet-400 flex items-center justify-center transition-all">
+                <div className="w-10 h-10 rounded-md border border-hairline group-hover:border-purple-500 flex items-center justify-center transition-all">
                   <FaPlus size={14} />
                 </div>
                
-                <span className="text-sm font-medium">เพิ่มโปรเจกต์ใหม่</span>
+                <span className="text-body-sm font-medium">เพิ่มโปรเจกต์ใหม่</span>
                  
               </Link>
             </div>

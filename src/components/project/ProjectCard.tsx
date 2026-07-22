@@ -18,7 +18,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/project/${project.id}`}
-      className="group flex flex-col gap-4 bg-white border border-gray-100 rounded-2xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+      className="group flex flex-col gap-4 bg-canvas border border-hairline rounded-lg p-5 shadow-card hover:shadow-modal hover:-translate-y-0.5 transition-all duration-200"
     >
       {/* Top Row */}
       <div className="flex items-start justify-between">
@@ -29,11 +29,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             style={{ backgroundColor: project.color }}
           />
           <div>
-            <p className="font-semibold text-gray-900 text-sm leading-snug group-hover:text-violet-600 transition-colors">
+            <p className="font-semibold text-ink text-body-md leading-snug group-hover:text-purple-500 transition-colors">
               {project.name}
             </p>
             {project.desc && (
-              <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">
+              <p className="text-caption-sm text-neutral-500 mt-0.5 line-clamp-1">
                 {project.desc}
               </p>
             )}
@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <button
           onClick={(e) => e.preventDefault()}
-          className="text-gray-300 hover:text-gray-500 p-1 rounded-lg transition-colors"
+          className="text-neutral-400 hover:text-neutral-600 p-1 rounded-sm transition-colors"
         >
           <BsThreeDots size={16} />
         </button>
@@ -54,7 +54,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <Badge key={cat} type="category" value={cat} />
           ))}
           {project.tasks.length === 0 && (
-            <span className="text-xs text-gray-300">ยังไม่มี task</span>
+            <span className="text-caption-sm text-neutral-400">ยังไม่มี task</span>
           )}
         </div>
       )}
@@ -64,21 +64,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {total > 0 ? (
           <ProgressBar total={total} done={done} />
         ) : (
-          <p className="text-xs text-gray-300">ยังไม่มี task</p>
+          <p className="text-caption-sm text-neutral-400">ยังไม่มี task</p>
         )}
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-50">
-        <span className="text-xs text-gray-400">
+      <div className="flex items-center justify-between pt-3 border-t border-hairline">
+        <span className="text-caption-sm text-neutral-500">
           {total} tasks
         </span>
         {done === total && total > 0 ? (
-          <span className="text-xs font-semibold text-emerald-500">✅ เสร็จแล้ว!</span>
+          <span className="text-caption-sm font-medium text-success">✅ เสร็จแล้ว!</span>
         ) : (
-          <span className="text-xs text-gray-400">
+          <span className="text-caption-sm text-neutral-500">
             เหลือ{" "}
-            <span className="font-semibold text-amber-500">{total - done}</span>{" "}
+            <span className="font-semibold text-warning">{total - done}</span>{" "}
             รายการ
           </span>
         )}

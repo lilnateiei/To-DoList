@@ -20,7 +20,7 @@ const MOCK_PROJECT: Project[] = [
     id: "1",
     name: "Website Redesign",
     desc: "ออกแบบหน้าเว็บใหม่ทั้งหมด",
-    color: "#8b5cf6",
+    color: "#6c47ff",
     createdAt: new Date().toISOString(),
     tasks: [
       { id: "t1", name: "วาด Wireframe", category: "design",       priority: "high",   status: "done", createdAt: new Date().toISOString() },
@@ -32,7 +32,7 @@ const MOCK_PROJECT: Project[] = [
     id: "2",
     name: "Marketing Q1",
     desc: "แคมเปญการตลาดไตรมาสแรก",
-    color: "#f59e0b",
+    color: "#ea520c",
     createdAt: new Date().toISOString(),
     tasks: [
       { id: "t4", name: "วางแผนงบ",      category: "marketing",   priority: "high",   status: "done", createdAt: new Date().toISOString() },
@@ -108,22 +108,22 @@ export default function ProjectPage() {
 
   if (!project) return null; // กันไว้เผื่อยังไม่มีโปรเจกต์ถูกเลือก
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-canvas">
 
       {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100 px-6 py-4">
-        <div className="max-w-3xl mx-auto flex justify-between items-center">
+      <nav className="sticky top-0 z-50 nav-bar">
+        <div className="max-w-3xl mx-auto flex justify-between items-center px-6">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center">
-              <RiTodoFill className="text-white" size={14} />
+            <div className="w-7 h-7 bg-purple-500 rounded-md flex items-center justify-center">
+              <RiTodoFill className="text-canvas" size={14} />
             </div>
-            <span className="font-bold text-gray-900">
-              To-do <span className="text-violet-600">List</span>
+            <span className="font-bold text-ink text-body-md">
+              To-do <span className="text-purple-500">List</span>
             </span>
           </div>
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer"
+            className="btn-primary text-sm cursor-pointer"
           >
             <FaPlus size={11} />
             เพิ่ม Task
@@ -136,7 +136,7 @@ export default function ProjectPage() {
         {/* Back */}
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-violet-600 transition-colors w-fit"
+          className="flex items-center gap-1.5 text-body-sm text-neutral-500 hover:text-purple-500 transition-colors w-fit"
         >
           <FaArrowLeft size={11} />
           กลับหน้าหลัก
@@ -146,10 +146,10 @@ export default function ProjectPage() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full" style={{ backgroundColor: project?.color }} />
-            <h1 className="text-xl font-bold text-gray-900">{project?.name}</h1>
+            <h1 className="text-display-xl font-semibold text-ink">{project?.name}</h1>
           </div>
           {project?.desc && (
-            <p className="text-sm text-gray-400">{project?.desc}</p>
+            <p className="text-body-sm text-neutral-500">{project?.desc}</p>
           )}
           <ProgressBar total={counts.all} done={counts.done} />
         </div>
@@ -174,7 +174,7 @@ export default function ProjectPage() {
             action={
               <button
                 onClick={() => setShowForm(true)}
-                className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all cursor-pointer"
+                className="btn-primary text-sm cursor-pointer"
               >
                 <FaPlus size={11} />
                 เพิ่ม Task

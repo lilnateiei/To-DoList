@@ -10,19 +10,19 @@ export default function ProgressBar({ total, done, showLabel = true }: ProgressB
   return (
     <div className="w-full flex flex-col gap-1.5">
       {showLabel && (
-        <div className="flex justify-between text-xs text-gray-400">
+        <div className="flex justify-between text-caption-sm text-neutral-500">
           <span>{done}/{total} tasks</span>
-          <span className="font-semibold text-violet-600">{pct}%</span>
+          <span className="font-medium text-purple-500">{pct}%</span>
         </div>
       )}
-      <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+      <div className="w-full h-1.5 bg-surface-2 rounded-md overflow-hidden">
         <div
-          className="h-full rounded-full transition-all duration-700"
+          className="h-full rounded-md transition-all duration-700"
           style={{
             width: `${pct}%`,
             background: pct === 100
-              ? "linear-gradient(90deg, #10b981, #34d399)"  // สีเขียวเมื่อเสร็จ 100%
-              : "linear-gradient(90deg, #8b5cf6, #a78bfa)", // สีม่วงปกติ
+              ? "linear-gradient(90deg, var(--color-success), #34d399)"  // สีเขียวเมื่อเสร็จ 100%
+              : "linear-gradient(90deg, var(--color-purple-500), #a78bfa)", // สีม่วงปกติ
           }}
         />
       </div>
