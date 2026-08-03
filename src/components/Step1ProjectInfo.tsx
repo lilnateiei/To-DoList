@@ -60,9 +60,7 @@ export default function Step1ProjectInfo({ draft, onChange }: Props) {
             onChange={(e) => onChange({ desc: e.target.value })}
             rows={3}
             placeholder="อธิบายเป้าหมายของโปรเจกต์..."
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm
-              text-gray-800 placeholder:text-gray-400 outline-none resize-none
-              focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(124,58,237,.08)] transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 outline-none resize-none focus:border-violet-500 focus:bg-white"
           />
         </div>
 

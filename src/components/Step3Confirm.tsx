@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaCalendar, FaClock } from "react-icons/fa";
-import type { ProjectDraft } from "@/page";
+import type { ProjectDraft } from "@/types";
 import type { Task, Category, Priority } from "@/types";
 
 const CATEGORY_MAP = {
