@@ -1,38 +1,85 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function SignupPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mockUser = {
+      name: username || (email ? email.split("@")[0] : "Demo User"),
+      email: email || "demo@example.com",
+    };
+    window.localStorage.setItem("todo-user", JSON.stringify(mockUser));
+    router.push("/");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-        
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
-          <p className="text-gray-500 mt-2">เริ่มจัดการงานของคุณได้เลยวันนี้</p>
-        </div>
+      <Card className="w-full max-w-md shadow-xl border border-gray-100">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-2xl font-bold text-gray-900">Create Account</CardTitle>
+          <CardDescription className="text-gray-500 mt-2">เริ่มจัดการงานของคุณได้เลยวันนี้</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="John Doe"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-        <form className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-            <input type="text" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="John Doe" />
-          </div>
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="name@example.com" />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="••••••••" />
-          </div>
-
-          <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-purple-200 mt-2">
-            สมัครสมาชิก
-          </button>
-        </form>
-
-        <p className="text-center text-sm text-gray-500 mt-6">
-          มีบัญชีอยู่แล้ว? <a href="#" className="text-purple-600 font-semibold hover:underline">เข้าสู่ระบบ</a>
-        </p>
-      </div>
+            <Button type="submit" className="w-full mt-2">
+              สมัครสมาชิก
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-col gap-2">
+          <p className="text-center text-sm text-gray-500">
+            มีบัญชีอยู่แล้ว?{" "}
+            <Link href="/login" className="text-[hsl(var(--primary))] font-semibold hover:underline">
+              เข้าสู่ระบบ
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
