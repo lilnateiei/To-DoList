@@ -4,20 +4,22 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash, FaCalendar, FaClock } from "react-icons/fa";
 import type { ProjectDraft } from "@/types";
 import type { Task, Category, Priority } from "@/types";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const CATEGORY_MAP = {
-  other:       { label: "📌 Other",      bg: "bg-gray-100",   text: "text-gray-500"   },
-  design:      { label: "🎨 Design",     bg: "bg-pink-50",    text: "text-pink-500"   }, 
-  development: { label: "💻 Dev",        bg: "bg-blue-50",    text: "text-blue-500"   },
-  marketing:   { label: "📣 Marketing",  bg: "bg-amber-50",   text: "text-amber-500"  },
-  research:    { label: "🔍 Research",   bg: "bg-teal-50",    text: "text-teal-500"   },
-  meeting:     { label: "🤝 Meeting",    bg: "bg-orange-50",  text: "text-orange-500" },
+  other:       { label: "Other",      bg: "bg-gray-100",   text: "text-gray-500"   },
+  design:      { label: "Design",     bg: "bg-pink-50",    text: "text-pink-500"   }, 
+  development: { label: "Dev",        bg: "bg-blue-50",    text: "text-blue-500"   },
+  marketing:   { label: "Marketing",  bg: "bg-amber-50",   text: "text-amber-500"  },
+  research:    { label: "Research",   bg: "bg-teal-50",    text: "text-teal-500"   },
+  meeting:     { label: "Meeting",    bg: "bg-orange-50",  text: "text-orange-500" },
 };
 
 const PRIORITY_MAP = {
-  high:   { emoji: "🔴", label: "สูง",   bg: "bg-red-50",     text: "text-red-500"     },
-  medium: { emoji: "🟡", label: "กลาง",  bg: "bg-amber-50",   text: "text-amber-500"   },
-  low:    { emoji: "🟢", label: "ต่ำ",   bg: "bg-emerald-50", text: "text-emerald-600" },
+  high:   { label: "สูง",   bg: "bg-red-50",     text: "text-red-500"     },
+  medium: { label: "กลาง",  bg: "bg-amber-50",   text: "text-amber-500"   },
+  low:    { label: "ต่ำ",   bg: "bg-emerald-50", text: "text-emerald-600" },
 };
 
 interface Props {
@@ -72,7 +74,7 @@ export default function Step3Confirm({ draft }: Props) {
           ขั้นตอนที่ 3
         </p>
         <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-          ยืนยันโปรเจกต์ ✅
+          ยืนยันโปรเจกต์
         </h1>
         <p className="text-sm text-gray-400 mt-1">
           ตรวจสอบข้อมูลก่อนสร้างโปรเจกต์ของคุณ
@@ -80,7 +82,7 @@ export default function Step3Confirm({ draft }: Props) {
       </div>
 
       {/* Project Summary Card */}
-      <div className="border border-gray-100 rounded-2xl overflow-hidden shadow-sm bg-white">
+      <Card className="overflow-hidden shadow-sm border border-gray-100 bg-white">
 
         {/* Project Header */}
         <div 
@@ -167,7 +169,7 @@ export default function Step3Confirm({ draft }: Props) {
 
         </div>
 
-      </div>
+      </Card>
 
       {/* Priority Breakdown */}
       {totalTasks > 0 && (
@@ -175,7 +177,6 @@ export default function Step3Confirm({ draft }: Props) {
           
           <div className="bg-red-50 border border-red-100 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🔴</span>
               <p className="text-sm font-bold text-red-700">สำคัญสูง</p>
             </div>
             <p className="text-2xl font-bold text-red-600 mb-1">{highPriorityTasks}</p>
@@ -186,7 +187,6 @@ export default function Step3Confirm({ draft }: Props) {
 
           <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🟡</span>
               <p className="text-sm font-bold text-amber-700">สำคัญกลาง</p>
             </div>
             <p className="text-2xl font-bold text-amber-600 mb-1">{mediumPriorityTasks}</p>
@@ -197,7 +197,6 @@ export default function Step3Confirm({ draft }: Props) {
 
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🟢</span>
               <p className="text-sm font-bold text-emerald-700">สำคัญต่ำ</p>
             </div>
             <p className="text-2xl font-bold text-emerald-600 mb-1">{lowPriorityTasks}</p>
@@ -210,7 +209,7 @@ export default function Step3Confirm({ draft }: Props) {
       )}
 
       {/* Tasks Preview */}
-      <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden">
+      <Card className="bg-white overflow-hidden border border-gray-100">
         
         {/* Header with Toggle */}
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
@@ -228,13 +227,15 @@ export default function Step3Confirm({ draft }: Props) {
           {totalTasks > 0 && (
             <div className="flex items-center gap-2">
               {hasMoreTasks && (
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setShowAllTasks(!showAllTasks)}
-                  className="flex items-center gap-1 text-xs font-medium text-violet-600 hover:text-violet-700 bg-violet-50 hover:bg-violet-100 px-3 py-2 rounded-lg transition-all"
+                  className="gap-1 text-xs text-violet-600 hover:text-violet-700 hover:bg-violet-50"
                 >
                   {showAllTasks ? <FaEyeSlash size={10} /> : <FaEye size={10} />}
                   {showAllTasks ? 'แสดงน้อยลง' : 'แสดงทั้งหมด'}
-                </button>
+                </Button>
               )}
             </div>
           )}
@@ -243,8 +244,8 @@ export default function Step3Confirm({ draft }: Props) {
         {/* Tasks List */}
         {totalTasks === 0 ? (
           <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <span className="text-2xl">📋</span>
+            <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-3 text-gray-400 font-bold text-xs">
+              0
             </div>
             <p className="text-sm font-medium text-gray-600 mb-1">
               ยังไม่มี task
@@ -270,14 +271,6 @@ export default function Step3Confirm({ draft }: Props) {
                     <span className="text-xs text-gray-500 font-bold">{i + 1}</span>
                   </div>
 
-                  {/* Priority */}
-                  <span 
-                    className="text-base flex-shrink-0" 
-                    title={`ความสำคัญ${prioConfig.label}`}
-                  >
-                    {prioConfig.emoji}
-                  </span>
-
                   {/* Task Info */}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-800 truncate mb-1">
@@ -301,7 +294,6 @@ export default function Step3Confirm({ draft }: Props) {
                             day: "numeric",
                             month: "short",
                           })}
-                          {isOverdue && <span className="text-red-600">⚠️</span>}
                         </span>
                       )}
                     </div>
@@ -318,18 +310,20 @@ export default function Step3Confirm({ draft }: Props) {
             
             {!showAllTasks && hasMoreTasks && (
               <div className="p-4 text-center border-t border-gray-100">
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setShowAllTasks(true)}
-                  className="text-xs text-violet-600 hover:text-violet-700 font-medium"
+                  className="text-xs text-violet-600 hover:text-violet-700"
                 >
                   และอีก {draft.tasks.length - 5} รายการ...
-                </button>
+                </Button>
               </div>
             )}
           </div>
         )}
 
-      </div>
+      </Card>
 
       {/* Additional Info Grid */}
       <div className="grid sm:grid-cols-2 gap-4">
@@ -337,7 +331,6 @@ export default function Step3Confirm({ draft }: Props) {
         {/* Category Breakdown */}
         <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-base">📊</span>
             <p className="text-sm font-bold text-gray-700">ประเภทงาน</p>
           </div>
           
@@ -373,7 +366,6 @@ export default function Step3Confirm({ draft }: Props) {
         {/* Timeline & Summary */}
         <div className="bg-violet-50 border border-violet-100 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-base">⏱️</span>
             <p className="text-sm font-bold text-violet-700">สรุปโปรเจกต์</p>
           </div>
           
@@ -413,7 +405,7 @@ export default function Step3Confirm({ draft }: Props) {
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-red-600">เกินกำหนด:</span>
                     <span className="text-sm font-semibold text-red-600">
-                      {overdueTasks} tasks ⚠️
+                      {overdueTasks} tasks
                     </span>
                   </div>
                 )}

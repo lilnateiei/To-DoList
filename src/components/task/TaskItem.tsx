@@ -4,7 +4,8 @@ import { useState } from "react";
 import { FaTrash, FaChevronDown } from "react-icons/fa";
 import { MdDragIndicator } from "react-icons/md";
 import { BsCalendar3 } from "react-icons/bs";
-import Badge from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
 import type { Task } from "@/types";
 
 interface TaskItemProps {
@@ -79,23 +80,27 @@ export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
         </div>
 
         {/* Expand (mobile) */}
-        <button
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={() => setExpanded(!expanded)}
-          className="sm:hidden text-gray-300 p-1"
+          className="sm:hidden text-gray-300 h-7 w-7"
         >
           <FaChevronDown
             size={12}
             className={`transition-transform ${expanded ? "rotate-180" : ""}`}
           />
-        </button>
+        </Button>
 
         {/* Delete */}
-        <button
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={() => onDelete(task.id)}
-          className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 p-1 rounded-lg transition-all cursor-pointer ml-1"
+          className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 hover:bg-red-50 h-7 w-7 ml-1"
         >
           <FaTrash size={12} />
-        </button>
+        </Button>
       </div>
 
       {/* Expand on mobile */}

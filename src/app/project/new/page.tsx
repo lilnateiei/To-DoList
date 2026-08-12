@@ -63,25 +63,7 @@ export default function NewProjectPage() {
     <div className="min-h-screen bg-white">
 
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 px-4 sm:px-6">
-        <div className="max-w-2xl mx-auto h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center">
-              <RiTodoFill className="text-white" size={13} />
-            </div>
-            <span className="font-bold text-gray-900">
-              Todo<span className="text-violet-600">Flow</span>
-            </span>
-          </div>
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-violet-600 hover:bg-violet-50 px-3 py-1.5 rounded-lg transition-all"
-          >
-            <FaArrowLeft size={11} /> กลับ
-          </Link>
-        </div>
-      </nav>
-
+       
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 pb-20 flex flex-col gap-8">
 
         {/* Step Indicator */}
@@ -132,7 +114,7 @@ export default function NewProjectPage() {
             >
               {loading
                 ? <><FaSpinner className="animate-spin" size={13} /> กำลังสร้าง...</>
-                : <>✦ สร้างโปรเจกต์เลย!</>
+                : <>สร้างโปรเจกต์เลย!</>
               }
             </button>
           )}

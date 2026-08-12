@@ -5,11 +5,13 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { FaPlus, FaArrowLeft } from "react-icons/fa";
 import { RiTodoFill } from "react-icons/ri";
+import { CheckCircle2, ClipboardList } from "lucide-react";
 import TaskItem from "@/components/task/TaskItem";
 import TaskFilter from "@/components/task/TaskFilter";
 import TaskForm from "@/components/task/TaskForm";
 import ProgressBar from "@/components/ui/ProgressBar";
 import EmptyState from "@/components/ui/EmptyState";
+import { Button } from "@/components/ui/button";
 import type { Task, Project, TaskFilter as TFilter } from "@/types";
 
 
@@ -121,13 +123,13 @@ export default function ProjectPage() {
               To-do <span className="text-violet-600">List</span>
             </span>
           </div>
-          <button
+          <Button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer"
+            className="gap-2"
           >
             <FaPlus size={11} />
             เพิ่ม Task
-          </button>
+          </Button>
         </div>
       </nav>
 
@@ -168,17 +170,17 @@ export default function ProjectPage() {
         {/* Task List */}
         {filtered.length === 0 ? (
           <EmptyState
-            emoji={filter.status === "done" ? "🎉" : "📋"}
+            icon={filter.status === "done" ? <CheckCircle2 className="w-12 h-12 text-violet-400" /> : <ClipboardList className="w-12 h-12 text-gray-300" />}
             title={filter.status === "done" ? "ยังไม่มี task ที่เสร็จ" : "ไม่มี task ตรงเงื่อนไข"}
             desc="ลองเปลี่ยน filter หรือเพิ่ม task ใหม่ได้เลย"
             action={
-              <button
+              <Button
                 onClick={() => setShowForm(true)}
-                className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all cursor-pointer"
+                className="gap-2"
               >
                 <FaPlus size={11} />
                 เพิ่ม Task
-              </button>
+              </Button>
             }
           />
         ) : (

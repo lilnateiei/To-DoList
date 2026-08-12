@@ -1,6 +1,11 @@
 "use client";
 
 import type { ProjectDraft } from "@/types";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import Back from "@/components/ui/Back"
 
 const COLORS = [
   "#7c3aed","#3b82f6","#10b981",
@@ -20,57 +25,55 @@ export default function Step1ProjectInfo({ draft, onChange }: Props) {
     <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
 
       {/* Header */}
+      <Back href="/" label="ย้อนกลับ" />
       <div>
         <p className="text-xs font-semibold text-violet-500 uppercase tracking-widest mb-1">ขั้นตอนที่ 1</p>
-        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">ตั้งชื่อโปรเจกต์ 🗂️</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">ตั้งชื่อโปรเจกต์</h1>
         <p className="text-sm text-gray-400 mt-1">กรอกข้อมูลพื้นฐานให้โปรเจกต์ของคุณ</p>
       </div>
 
       {/* Form Card */}
-      <div className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-5 shadow-sm">
+      <Card className="p-6 flex flex-col gap-5 shadow-sm border border-gray-100">
 
         {/* Name */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-semibold text-gray-700">
+        <div className="flex flex-col gap-1.5 text-left">
+          <Label htmlFor="projectName">
             ชื่อโปรเจกต์ <span className="text-red-400">*</span>
-          </label>
-          <input
+          </Label>
+          <Input
+            id="projectName"
             type="text"
             value={draft.name ?? ""}
             onChange={(e) => onChange({ name: e.target.value })}
             placeholder="เช่น Website Redesign, แอปจัดการเงิน..."
-            className={`w-full px-4 py-3 rounded-xl border bg-gray-50 text-sm text-gray-800
-              placeholder:text-gray-400 outline-none transition-all
-              focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(124,58,237,.08)]
-              ${!draft.name?.trim() && draft.name !== undefined && draft.name !== ""
-                ? "border-red-300 bg-red-50"
-                : "border-gray-200"
-              }`}
+            className={!draft.name?.trim() && draft.name !== undefined && draft.name !== "" ? "border-red-300 bg-red-50 focus-visible:ring-red-400" : ""}
           />
         </div>
 
         {/* Desc */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-semibold text-gray-700">
+        <div className="flex flex-col gap-1.5 text-left">
+          <Label htmlFor="projectDesc">
             คำอธิบาย{" "}
             <span className="text-gray-400 font-normal text-xs">(ไม่บังคับ)</span>
-          </label>
-          <textarea
+          </Label>
+          <Textarea
+            id="projectDesc"
             value={draft.desc ?? ""}
             onChange={(e) => onChange({ desc: e.target.value })}
             rows={3}
             placeholder="อธิบายเป้าหมายของโปรเจกต์..."
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-800 placeholder:text-gray-400 outline-none resize-none focus:border-violet-500 focus:bg-white"
+            className="resize-none"
           />
         </div>
 
         {/* Color */}
-        <div className="flex flex-col gap-2.5">
-          <label className="text-sm font-semibold text-gray-700">สีธีมโปรเจกต์</label>
+        <div className="flex flex-col gap-2.5 text-left">
+          <Label>สีธีมโปรเจกต์</Label>
           <div className="flex gap-2.5 flex-wrap">
             {COLORS.map((c) => (
               <button
                 key={c}
+                type="button"
                 onClick={() => onChange({ color: c })}
                 className={`w-9 h-9 rounded-full cursor-pointer border-[3px] border-white shadow-md transition-all
                   ${draft.color === c ? "ring-2 ring-offset-1 ring-gray-900 scale-110" : "ring-2 ring-transparent hover:scale-105"}`}
@@ -81,8 +84,8 @@ export default function Step1ProjectInfo({ draft, onChange }: Props) {
         </div>
 
         {/* Preview */}
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-gray-700">ตัวอย่างการ์ด</label>
+        <div className="flex flex-col gap-2 text-left">
+          <Label>ตัวอย่างการ์ด</Label>
           <div className="flex items-center gap-3 border border-gray-100 rounded-2xl p-4 bg-gray-50">
             <div
               className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-white font-bold"
@@ -107,7 +110,7 @@ export default function Step1ProjectInfo({ draft, onChange }: Props) {
           </div>
         </div>
 
-      </div>
+      </Card>
     </div>
   );
 }

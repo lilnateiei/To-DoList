@@ -41,11 +41,13 @@ export default function AddTaskForm({ onAddTask }: AddTaskFormProps) {
     }
 
     onAddTask({
-      id: Date.now(),
+      id: String(Date.now()),
       name: name.trim(),
       desc: desc.trim(),
+      category: "other",
       priority,
-      done: false,
+      status: "todo",
+      createdAt: new Date().toISOString(),
     });
 
     setName("");
